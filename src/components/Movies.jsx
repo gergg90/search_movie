@@ -1,8 +1,8 @@
 function ListOfMovies({ movies }) {
   return (
-    <ul>
+    <ul className="movies">
       {movies.map((movie) => (
-        <li key={movie.id}>
+        <li className="movie" key={movie.id}>
           <h3>{movie.title}</h3>
           <p> Year: {movie.year}</p>
           <img src={movie.image} alt={movie.title} />
@@ -12,16 +12,19 @@ function ListOfMovies({ movies }) {
   );
 }
 
-function NoMovieResult() {
-  return <p>No se encontraron resultados.</p>;
+function NoMoviesResults () {
+  return (
+    <p>No se encontraron películas para esta búsqueda</p>
+  )
 }
 
 export function Movies({ movies }) {
   const hasMovies = movies?.length > 0;
 
   return (
-    <div>
-      {hasMovies ? <ListOfMovies movies={movies} /> : <NoMovieResult />}
-    </div>
+    
+      hasMovies ? <ListOfMovies movies={movies} /> 
+      : <NoMoviesResults />
+    
   );
 }
