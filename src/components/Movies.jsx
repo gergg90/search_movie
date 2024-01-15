@@ -12,19 +12,16 @@ function ListOfMovies({ movies }) {
   );
 }
 
-function NoMoviesResults () {
-  return (
-    <p>No se encontraron películas para esta búsqueda</p>
-  )
+function NoMoviesResults() {
+  return <p>No se encontraron películas para esta búsqueda</p>;
 }
 
 export function Movies({ movies }) {
   const hasMovies = movies?.length > 0;
 
   return (
-    
-      hasMovies ? <ListOfMovies movies={movies} /> 
-      : <NoMoviesResults />
-    
-  );
+    hasMovies 
+    ? <ListOfMovies movies={movies} /> 
+    : <NoMoviesResults />
+    )
 }

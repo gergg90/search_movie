@@ -6,8 +6,18 @@ import { useSearch } from "./hooks/useSearch.js";
 // ! https://www.omdbapi.com/?apikey=67ae54d&s=salvajes
 
 function App() {
-  const { movies } = useMovies();
-  const { search, error, handleChange, handleSubmit } = useSearch();
+  const { search, updateSearch, error } = useSearch();
+  const { movies, getMovies, loading } = useMovies({ search });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getMovies()
+  };
+
+  const handleChange = (e) => {
+    const newSearch = e.target.value;
+    updateSearch(newSearch);
+  };
 
   return (
     <div className="page">
@@ -17,7 +27,7 @@ function App() {
           <input
             onChange={handleChange}
             value={search}
-            name="query"
+            name="search"
             placeholder="Blade runner, it, Rambo..."
           />
 
@@ -39,7 +49,9 @@ function App() {
       </header>
 
       <main>
-        <Movies movies={movies} />
+
+        { loading ? <p>Cargando</p> : <Movies movies={movies} /> }
+
       </main>
     </div>
   );
